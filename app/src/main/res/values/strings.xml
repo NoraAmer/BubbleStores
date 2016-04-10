@@ -7,4 +7,11 @@
     <string name="forgot_your_password">Forgot your password</string>
     <string name="do_not_have_an_account">Don\'t have an account?</string>
     <string name="register">Register</string>
+    <string name="add_item">Add Item</string>
+    <string name="shop_name">Shop Name</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_closed">Close</string>
+
+
 </resources>
