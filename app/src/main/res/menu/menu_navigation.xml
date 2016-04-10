@@ -3,25 +3,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navProfileBTN"
-            android:icon="@drawable/shop_profile"
             android:tint="@color/button_grey"
             android:title="Shop Profile" />
         <item
             android:id="@+id/navLoginBTN"
-            android:icon="@drawable/login"
             android:tint="@color/button_grey"
             android:title="Login" />
         <item
             android:id="@+id/navRegistrationBTN"
-            android:icon="@drawable/register"
             android:tint="@color/button_grey"
             android:title="Register" />
 
         <item
             android:id="@+id/navAddItemBTN"
-            android:icon="@drawable/add_item"
             android:tint="@color/button_grey"
             android:title="Add Item"/>
+
+        <item
+            android:id="@+id/navShopRegiter"
+            android:tint="@color/button_grey"
+            android:title="Shop Register"/>
+
 
 
     </group>

@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     LoginFragment loginFragment;
     RegistrationFragment registrationFragment;
     AddItemFragment addItemFragment;
+    RegisterShopFragment registerShopFragment;
 
 
     @Override
@@ -111,6 +112,19 @@ public class MainActivity extends AppCompatActivity {
                             mDrawerLayout.closeDrawers();
                             return true;
                         }
+
+                        if (menuItem.getItemId() == R.id.navShopRegiter) {
+                            fragmentManager = getSupportFragmentManager();
+                            fragmentTransaction = fragmentManager.beginTransaction();
+                            registerShopFragment = new RegisterShopFragment();
+                            fragmentTransaction.replace(R.id.fragment_main, registerShopFragment);
+                            fragmentTransaction.commit();
+                            mDrawerLayout.closeDrawers();
+                            return true;
+                        }
+
+
+
                         // Closing drawer on item click
                         mDrawerLayout.closeDrawers();
                         return true;
