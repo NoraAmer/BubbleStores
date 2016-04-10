@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction = fragmentManager.beginTransaction();
                             shopProfileFragment = new ShopProfileFragment();
                             fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
+                            fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
                             return true;
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction = fragmentManager.beginTransaction();
                             loginFragment = new LoginFragment();
                             fragmentTransaction.replace(R.id.fragment_main, loginFragment);
+                            fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
                             return true;
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction = fragmentManager.beginTransaction();
                             registrationFragment = new RegistrationFragment();
                             fragmentTransaction.replace(R.id.fragment_main, registrationFragment);
+                            fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
                             return true;
@@ -108,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction = fragmentManager.beginTransaction();
                             addItemFragment = new AddItemFragment();
                             fragmentTransaction.replace(R.id.fragment_main, addItemFragment);
+                            fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
                             return true;

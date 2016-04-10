@@ -12,6 +12,7 @@
 
     <string name="drawer_open">Open</string>
     <string name="drawer_closed">Close</string>
+    <string name="birthday">Birthday</string>
 
 
 </resources>

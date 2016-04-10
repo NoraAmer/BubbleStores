@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:padding="7dp"
-                    android:text="Sign Up"
+                    android:text="Owner Details"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -53,7 +53,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Owner Name"
+                    android:hint="Name"
                     android:inputType="textPersonName"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -99,28 +99,51 @@
                     android:fontFamily="sans-serif"/>
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
-                <EditText
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center_vertical"
+                    android:text="Gender:"
+                    android:textSize="17sp" />
+
+                <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Mobile"
-                    android:inputType="phone"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="30dp"
+                            android:text="Male" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Female" />
+                    </LinearLayout>
+                </RadioGroup>
+            </LinearLayout>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Foundation Date"
-                android:onClick="showDatePickerDialog"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/foundation_date"/>
+                android:text="@string/birthday"
+                android:onClick="showBirthdayDatePickerDialog"
+                android:id="@+id/birthday"
+                android:textAllCaps="false"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
