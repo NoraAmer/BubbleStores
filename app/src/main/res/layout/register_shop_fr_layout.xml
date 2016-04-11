@@ -51,6 +51,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/name_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Shop Name"
@@ -65,6 +66,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/mobile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Mobile"
@@ -78,6 +80,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/addressText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address"
@@ -92,6 +95,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/short_desc_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Short Desc"
@@ -106,6 +110,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/long_desc_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Long Desc"
