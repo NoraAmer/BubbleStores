@@ -8,6 +8,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -56,7 +57,7 @@ public class Core {
     }
 
 
-    private String postRequest(String url, JSONObject params) throws IOException {
+    private int postRequest(String url, JSONObject params) throws IOException {
         URL url1 = new URL(Domain + url);
         HttpURLConnection connection = (HttpURLConnection) url1.openConnection();
         connection.setRequestMethod("POST");
@@ -87,7 +88,14 @@ public class Core {
         }
         data = stringBuffer.toString();
         Log.d("data", data);
-        return data;
+        int response_code = 0;
+        try {
+            JSONObject response = new JSONObject(data);
+            response_code = response.getInt("responce");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return response_code;
     }
 
     public String uploadImage(String sourceFileUri) {
@@ -186,5 +194,51 @@ public class Core {
     }
 
 
+    public int registerOwner(String name, String password, String email, String gender, String dateOfBirth, String profilePic) {
+        int id = 0;
+        JSONObject params = new JSONObject();
+        try {
+            if (name != null) {
+                params.put("name", name);
+            }else {
+                params.put("name", JSONObject.NULL);
+            }
+
+            if (password != null) {
+                params.put("password", password);
+            }else {
+                params.put("password", JSONObject.NULL);
+            }
+
+            if (email != null) {
+                params.put("email", email);
+            }else {
+                params.put("email", JSONObject.NULL);
+            }
+
+            if (gender != null) {
+                params.put("gender", gender);
+            }else {
+                params.put("gender", JSONObject.NULL);
+            }
+
+            if (dateOfBirth != null) {
+                params.put("DOB", dateOfBirth);
+            }else {
+                params.put("DOB", JSONObject.NULL);
+            }
+
+            if (profilePic != null) {
+                params.put("profile_pic", profilePic);
+            }else {
+                params.put("profile_pic", JSONObject.NULL);
+            }
+            Log.d("Params", params.toString());
+            id = postRequest("/signShopOwner", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
 
 }

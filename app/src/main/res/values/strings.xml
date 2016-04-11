@@ -13,6 +13,18 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_closed">Close</string>
     <string name="birthday">Birthday</string>
+    <string name="name">Name</string>
+    <string name="short_description">Short Description</string>
+    <string name="long_description">Long Description</string>
+    <string name="price">Price($)</string>
+    <string name="quantity">Quantity</string>
+    <string name="category">Category</string>
+
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_confirm_passord_not_identical">Confirm password not identical</string>
+
 
 
 </resources>
