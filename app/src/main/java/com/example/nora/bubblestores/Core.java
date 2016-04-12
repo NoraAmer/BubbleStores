@@ -91,7 +91,7 @@ public class Core {
         int response_code = 0;
         try {
             JSONObject response = new JSONObject(data);
-            response_code = response.getInt("responce");
+            response_code = response.getInt("response");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -194,51 +194,144 @@ public class Core {
     }
 
 
-    public int registerOwner(String name, String password, String email, String gender, String dateOfBirth, String profilePic) {
+    public int registerShop(String ownerName, String password, String owner_email, String mobile) {
         int id = 0;
         JSONObject params = new JSONObject();
         try {
-            if (name != null) {
-                params.put("name", name);
-            }else {
-                params.put("name", JSONObject.NULL);
+            if (ownerName != null) {
+                params.put("owner_name", ownerName);
+            } else {
+                params.put("owner_name", JSONObject.NULL);
             }
 
             if (password != null) {
                 params.put("password", password);
-            }else {
+            } else {
                 params.put("password", JSONObject.NULL);
             }
 
-            if (email != null) {
-                params.put("email", email);
-            }else {
-                params.put("email", JSONObject.NULL);
+            if (owner_email != null) {
+                params.put("owner_email", owner_email);
+            } else {
+                params.put("owner_email", JSONObject.NULL);
             }
 
-            if (gender != null) {
-                params.put("gender", gender);
-            }else {
-                params.put("gender", JSONObject.NULL);
+            if (mobile != null) {
+                params.put("mobile", mobile);
+            } else {
+                params.put("mobile", JSONObject.NULL);
             }
 
-            if (dateOfBirth != null) {
-                params.put("DOB", dateOfBirth);
-            }else {
-                params.put("DOB", JSONObject.NULL);
-            }
-
-            if (profilePic != null) {
-                params.put("profile_pic", profilePic);
-            }else {
-                params.put("profile_pic", JSONObject.NULL);
-            }
             Log.d("Params", params.toString());
-            id = postRequest("/signShopOwner", params);
+            id = postRequest("/signupShop", params);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return id;
+    }
+
+
+    public int editShop(int shop_id, String owner_name, String owner_email, String gender, String owner_date_of_birth,
+                        String owner_profile_pic, String shop_name, String shop_profile_pic, String shop_cover_pic,
+                        String mobile, String short_description, String description, String longitude, String latitude, String shop_address) {
+        JSONObject params = new JSONObject();
+        int response = 0;
+        try {
+
+            if (shop_id != 0) {
+                params.put("shop_id", shop_id);
+
+                if (owner_name != null) {
+                    params.put("owner_name", owner_name);
+                } else {
+                    params.put("owner_name", JSONObject.NULL);
+                }
+
+                if (owner_email != null) {
+                    params.put("owner_email", owner_email);
+                } else {
+                    params.put("owner_email", JSONObject.NULL);
+                }
+
+                if (gender != null) {
+                    params.put("gender", gender);
+                } else {
+                    params.put("gender", JSONObject.NULL);
+                }
+
+                if (owner_date_of_birth != null) {
+                    params.put("owner_date_of_birth", owner_date_of_birth);
+                } else {
+                    params.put("owner_date_of_birth", JSONObject.NULL);
+                }
+
+                if (owner_profile_pic != null) {
+                    params.put("owner_profile_pic", owner_profile_pic);
+                } else {
+                    params.put("owner_profile_pic", JSONObject.NULL);
+                }
+
+                if (shop_name != null) {
+                    params.put("shop_name", shop_name);
+                } else {
+                    params.put("shop_name", JSONObject.NULL);
+                }
+
+                if (shop_profile_pic != null) {
+                    params.put("shop_profile_pic", shop_profile_pic);
+                } else {
+                    params.put("shop_profile_pic", JSONObject.NULL);
+                }
+
+                if (shop_cover_pic != null) {
+                    params.put("shop_cover_pic", shop_cover_pic);
+                } else {
+                    params.put("shop_cover_pic", JSONObject.NULL);
+                }
+
+                if (mobile != null) {
+                    params.put("mobile", mobile);
+                } else {
+                    params.put("mobile", JSONObject.NULL);
+                }
+
+                if (short_description != null) {
+                    params.put("short_description", short_description);
+                } else {
+                    params.put("short_description", JSONObject.NULL);
+                }
+
+                if (description != null) {
+                    params.put("description", description);
+                } else {
+                    params.put("description", JSONObject.NULL);
+                }
+
+                if (longitude != null) {
+                    params.put("longitude", longitude);
+                } else {
+                    params.put("longitude", JSONObject.NULL);
+                }
+
+                if (latitude != null) {
+                    params.put("latitude", latitude);
+                } else {
+                    params.put("latitude", JSONObject.NULL);
+                }
+
+                if (shop_address != null) {
+                    params.put("shop_address", shop_address);
+                } else {
+                    params.put("shop_address", JSONObject.NULL);
+                }
+
+                Log.d("Params", params.toString());
+                response = postRequest("/editShop", params);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 
 }
