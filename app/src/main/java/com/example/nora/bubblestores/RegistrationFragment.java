@@ -2,13 +2,12 @@ package com.example.nora.bubblestores;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,9 +17,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -156,6 +152,11 @@ public class RegistrationFragment extends Fragment {
         private final String mName;
         private final String mEmail;
         private final String mPassword;
+        private int id = 0;
+
+        FragmentManager fragmentManager;
+        FragmentTransaction fragmentTransaction;
+        RegisterShopFragment registerShopFragment;
 
         OwnerRegisterTask(String name, String email, String password) {
             mName = name;
@@ -163,13 +164,29 @@ public class RegistrationFragment extends Fragment {
             mPassword = password;
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (id > 0) {
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                registerShopFragment = new RegisterShopFragment();
+                registerShopFragment.setId(id);
+                fragmentTransaction.replace(R.id.fragment_main, registerShopFragment);
+                fragmentTransaction.commit();
+            }else if(id == -2) {
+
+            }else {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+            super.onPostExecute(aVoid);
+        }
 
         @Override
         protected Void doInBackground(Void... params) {
-            int state = 0;
             Core core = new Core(getActivity());
-            int user_id = core.registerOwner(mName, mPassword, mEmail, null, null, null);
+            int user_id = core.registerShop(mName, mPassword, mEmail, null);
             Log.d("new owner id: ", String.valueOf(user_id));
+            id = user_id;
             return null;
         }
     }
