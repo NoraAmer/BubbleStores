@@ -1,48 +1,35 @@
 package com.example.nora.bubblestores;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.design.widget.NavigationView;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.CursorLoader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 
 public class AddItemFragment extends Fragment {
 
-    NavigationView navigationView;
-    private final int SELECT_FILE = 1;
-    private final int REQUEST_CAMERA = 0;
+//    private final int SELECT_FILE = 1;
+//    private final int REQUEST_CAMERA = 0;
     Spinner dropdown;
 //    Button addPhoto;
 //    ImageView imageView;
 
+    int id = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).toolbar.setTitle("Add Item");
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -57,8 +44,11 @@ public class AddItemFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         dropdown = (Spinner) view.findViewById(R.id.spinner);
         String[] categories = new String[]{"Crafts", "Home", "Accessory", "Artwork", "Clothing"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, categories);
         dropdown.setAdapter(adapter);
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
+        id = preferences.getInt("shopID",0);
 //        addPhoto = (Button) view.findViewById(R.id.add_photo);
 //        addPhoto.setOnClickListener(new View.OnClickListener() {
 //            @Override

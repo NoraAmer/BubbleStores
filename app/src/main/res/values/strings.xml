@@ -24,7 +24,8 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_field_required">This field is required</string>
     <string name="error_confirm_passord_not_identical">Confirm password not identical</string>
-
+    <string name="nameicon">nameIcon</string>
+    <string name="priceicon">priceIcon</string>
 
 
 </resources>

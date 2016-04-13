@@ -2,15 +2,17 @@ package com.example.nora.bubblestores;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -22,6 +24,9 @@ public class ShopProfileFragment extends Fragment {
     private int id;
     ImageView shopImage;
     TextView shopName, shopDesc, shopPhone, shopEmail, shopAddress;
+
+    private LinearLayout mView;
+    private ProgressBar mProgressBar;
 
 //    public void setId(int id) {
 //        this.id = id;
@@ -40,6 +45,12 @@ public class ShopProfileFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).toolbar.setTitle("Profile");
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         shopImage = (ImageView) view.findViewById(R.id.shop_image);
         shopName = (TextView) view.findViewById(R.id.shop_name);
@@ -47,6 +58,9 @@ public class ShopProfileFragment extends Fragment {
         shopPhone = (TextView) view.findViewById(R.id.shop_phone);
         shopEmail = (TextView) view.findViewById(R.id.shop_email);
         shopAddress = (TextView) view.findViewById(R.id.shop_address);
+
+        mView = (LinearLayout) view.findViewById(R.id.layout);
+        mProgressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
         id = preferences.getInt("shopID",0);
@@ -64,35 +78,38 @@ public class ShopProfileFragment extends Fragment {
         protected void onPostExecute(Object o) {
             try {
                 if (jsonObject.isNull("name")) {
-                    shopName.setText("No Name");
+                    shopName.setText("Add Name");
 
                 }else {
                     shopName.setText(jsonObject.getString("name"));
                 }
 
                 if (jsonObject.isNull("description")) {
-                    shopDesc.setText("No description");
+                    shopDesc.setText("Add Description");
                 }else {
                     shopDesc.setText(jsonObject.getString("description"));
                 }
 
                 if (jsonObject.isNull("mobile")) {
-                    shopPhone.setText("No mobile");
+                    shopPhone.setText("Add Mobile");
                 }else {
                     shopPhone.setText(jsonObject.getString("mobile"));
                 }
 
                 if (jsonObject.isNull("shop_address")) {
-                    shopAddress.setText("No shop address");
+                    shopAddress.setText("Add Shop Address");
                 }else {
                     shopAddress.setText(jsonObject.getString("shop_address"));
                 }
 
                 if (jsonObject.isNull("owner_email")) {
-                    shopEmail.setText("No owner email");
+                    shopEmail.setText("Add Email");
                 }else {
                     shopEmail.setText(jsonObject.getString("owner_email"));
                 }
+
+                mView.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.GONE);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

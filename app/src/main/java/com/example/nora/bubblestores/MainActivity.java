@@ -45,15 +45,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         SharedPreferences preferences = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
-        id = preferences.getInt("shopID",0);
-        if (id != 0){
+        id = preferences.getInt("shopID", 0);
 
-
-        }
         configureToolbar();
         configureNavigationView();
         configureDrawer();
+
+        if (id != 0) {
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            shopProfileFragment = new ShopProfileFragment();
+            fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            mDrawerLayout.closeDrawers();
+        } else {
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            loginFragment = new LoginFragment();
+            fragmentTransaction.replace(R.id.fragment_main, loginFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            mDrawerLayout.closeDrawers();
+        }
+
 
     }
 
@@ -77,6 +94,26 @@ public class MainActivity extends AppCompatActivity {
         assert navigationView != null;
         View header = navigationView.getHeaderView(0);
         shopNameNav = (TextView) header.findViewById(R.id.nameNavText);
+
+        MenuItem profile = navigationView.getMenu().findItem(R.id.navProfileBTN);
+        MenuItem login = navigationView.getMenu().findItem(R.id.navLoginBTN);
+        MenuItem register = navigationView.getMenu().findItem(R.id.navRegistrationBTN);
+        MenuItem registerShop = navigationView.getMenu().findItem(R.id.navShopRegiter);
+        MenuItem addItem = navigationView.getMenu().findItem(R.id.navAddItemBTN);
+
+        registerShop.setVisible(false);
+        if (id == 0){
+            profile.setVisible(false);
+            login.setVisible(true);
+            register.setVisible(true);
+            addItem.setVisible(false);
+        }else {
+            profile.setVisible(true);
+            login.setVisible(false);
+            register.setVisible(false);
+            addItem.setVisible(true);
+        }
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     // This method will trigger on item Click of navigation menu
@@ -136,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
                             mDrawerLayout.closeDrawers();
                             return true;
                         }
-
 
 
                         // Closing drawer on item click
