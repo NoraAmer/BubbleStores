@@ -1,5 +1,7 @@
 package com.example.nora.bubblestores;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -36,11 +38,19 @@ public class MainActivity extends AppCompatActivity {
     AddItemFragment addItemFragment;
     RegisterShopFragment registerShopFragment;
 
+    int id = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences preferences = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
+        id = preferences.getInt("shopID",0);
+        if (id != 0){
+
+
+        }
         configureToolbar();
         configureNavigationView();
         configureDrawer();

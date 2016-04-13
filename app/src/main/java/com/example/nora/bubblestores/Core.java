@@ -8,6 +8,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -231,6 +232,24 @@ public class Core {
         return id;
     }
 
+    public JSONObject getMyShop(int id){
+        JSONObject json = null;
+        JSONArray jsonArray;
+        try {
+            String response = getRequest("/GetShop/" + id + "/JSON");
+            if (!response.equals("0")){
+                json = new JSONObject(response);
+                jsonArray = json.getJSONArray("Shop");
+                json = jsonArray.getJSONObject(0);
+            }else {
+                Log.d("GetShop", response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        putMoviesDB(json);
+        return json;
+    }
 
     public int editShop(int shop_id, String owner_name, String owner_email, String gender, String owner_date_of_birth,
                         String owner_profile_pic, String shop_name, String shop_profile_pic, String shop_cover_pic,

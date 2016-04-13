@@ -29,6 +29,7 @@
 
 
                     <com.github.siyamed.shapeimageview.CircularImageView
+                        android:id="@+id/shop_image"
                         android:layout_width="130dp"
                         android:layout_height="130dp"
                         android:src="@drawable/kitty_hero"
@@ -41,6 +42,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/shop_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
@@ -111,6 +113,7 @@
                     android:textSize="17sp" />
 
                 <TextView
+                    android:id="@+id/shop_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
@@ -140,16 +143,19 @@
                     android:textSize="17sp" />
 
                 <TextView
+                    android:id="@+id/shop_phone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Phone: xxxxxxxxxx" />
 
                 <TextView
+                    android:id="@+id/shop_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email: xxxxx@xxxx" />
 
                 <TextView
+                    android:id="@+id/shop_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Address: xxxxxxxxxxxxxxxxxxxxxxxxxxx" />

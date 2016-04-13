@@ -1,6 +1,7 @@
 package com.example.nora.bubblestores;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -172,10 +173,13 @@ public class RegisterShopFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             if (id > 0){
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("Credentials", Context.MODE_PRIVATE).edit();
+                editor.putInt("shopID", id);
+                editor.apply();
                 fragmentManager = getFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 shopProfileFragment = new ShopProfileFragment();
-                shopProfileFragment.setId(id);
+//                shopProfileFragment.setId(id);
                 fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
                 fragmentTransaction.commit();
             }else {
