@@ -64,8 +64,7 @@ public class RegistrationFragment extends Fragment {
             // Create a new instance of DatePickerDialog and return it
 //            return new DatePickerDialog(getActivity(), this, year, month, day);
             DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
-            dialog.getDatePicker().setMaxDate(new Date().getTime());
-            dialog.getDatePicker().setMinDate(883692000000L);
+            dialog.getDatePicker().setMaxDate(915141600000L);
             return dialog;
         }
 

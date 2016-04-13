@@ -169,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction = fragmentManager.beginTransaction();
                             registerShopFragment = new RegisterShopFragment();
                             fragmentTransaction.replace(R.id.fragment_main, registerShopFragment);
+                            fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
                             return true;
