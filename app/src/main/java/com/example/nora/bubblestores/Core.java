@@ -175,7 +175,7 @@ public class Core {
                 Log.i("uploadFile", "HTTP Response is : " + serverResponseMessage + ": " + serverResponseCode);
 
                 if (serverResponseCode == 200) {
-                    Toast.makeText(context, "File Upload Complete.", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "File Upload Complete.", Toast.LENGTH_SHORT).show();
                 }
 
                 //close the streams //
@@ -185,10 +185,10 @@ public class Core {
 
             } catch (MalformedURLException ex) {
                 ex.printStackTrace();
-                Toast.makeText(context, "MalformedURLException", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "MalformedURLException", Toast.LENGTH_SHORT).show();
                 Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
             } catch (Exception e) {
-                Toast.makeText(context, "Got Exception : see logcat ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Got Exception : see logcat ", Toast.LENGTH_SHORT).show();
                 Log.e("Exception", e.getMessage());
             }
             return image_url;

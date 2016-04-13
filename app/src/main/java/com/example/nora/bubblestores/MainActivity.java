@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     public Toolbar toolbar;
     NavigationView navigationView;
 
-
     TextView shopNameNav;
     CircularImageView imageViewNav;
 
