@@ -195,6 +195,19 @@ public class Core {
         } // End else block
     }
 
+    public int logIn(String email, String password){
+        JSONObject json = new JSONObject();
+        int response = 0;
+        try {
+            json.put("email", email);
+            json.put("password", password);
+            response = postRequest("/loginShop", json);
+            Log.d("response", String.valueOf(response));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
 
     public int registerShop(String ownerName, String password, String owner_email, String mobile) {
         int id = 0;

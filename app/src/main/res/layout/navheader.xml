@@ -27,6 +27,7 @@
     android:orientation="horizontal"
     android:layout_marginTop="133dp">
     <com.github.siyamed.shapeimageview.CircularImageView
+        android:id="@+id/imageNav"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/kitty_hero"

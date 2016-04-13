@@ -24,7 +24,10 @@
             android:tint="@color/button_grey"
             android:title="Shop Register"/>
 
-
+        <item
+            android:id="@+id/navLogoutBTN"
+            android:tint="@color/button_grey"
+            android:title="Logout"/>
 
     </group>
 </menu>

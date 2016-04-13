@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.github.siyamed.shapeimageview.CircularImageView;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     TextView shopNameNav;
+    CircularImageView imageViewNav;
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
@@ -89,29 +92,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void configureNavigationView() {
+    public void configureNavigationView() {
         // Set behavior of Navigation drawer
         assert navigationView != null;
         View header = navigationView.getHeaderView(0);
         shopNameNav = (TextView) header.findViewById(R.id.nameNavText);
+        imageViewNav = (CircularImageView) header.findViewById(R.id.imageNav);
+
+        SharedPreferences preferences = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
+        id = preferences.getInt("shopID", 0);
 
         MenuItem profile = navigationView.getMenu().findItem(R.id.navProfileBTN);
         MenuItem login = navigationView.getMenu().findItem(R.id.navLoginBTN);
+        MenuItem logout = navigationView.getMenu().findItem(R.id.navLogoutBTN);
         MenuItem register = navigationView.getMenu().findItem(R.id.navRegistrationBTN);
         MenuItem registerShop = navigationView.getMenu().findItem(R.id.navShopRegiter);
         MenuItem addItem = navigationView.getMenu().findItem(R.id.navAddItemBTN);
 
         registerShop.setVisible(false);
         if (id == 0){
+            shopNameNav.setVisibility(View.GONE);
+            imageViewNav.setVisibility(View.GONE);
             profile.setVisible(false);
             login.setVisible(true);
             register.setVisible(true);
             addItem.setVisible(false);
+            logout.setVisible(false);
         }else {
+            shopNameNav.setVisibility(View.VISIBLE);
+            imageViewNav.setVisibility(View.VISIBLE);
             profile.setVisible(true);
             login.setVisible(false);
             register.setVisible(false);
             addItem.setVisible(true);
+            logout.setVisible(true);
         }
 
         navigationView.setNavigationItemSelectedListener(
@@ -127,6 +141,20 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction = fragmentManager.beginTransaction();
                             shopProfileFragment = new ShopProfileFragment();
                             fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                            mDrawerLayout.closeDrawers();
+                            return true;
+                        }
+                        if (menuItem.getItemId() == R.id.navLogoutBTN) {
+                            SharedPreferences.Editor editor = getSharedPreferences("Credentials", Context.MODE_PRIVATE).edit();
+                            editor.clear();
+                            editor.apply();
+                            MainActivity.this.configureNavigationView();
+                            fragmentManager = getSupportFragmentManager();
+                            fragmentTransaction = fragmentManager.beginTransaction();
+                            loginFragment = new LoginFragment();
+                            fragmentTransaction.replace(R.id.fragment_main, loginFragment);
                             fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
