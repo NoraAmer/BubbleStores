@@ -35,7 +35,7 @@ public class AddItemFragment extends Fragment {
     private final int SELECT_FILE = 1;
     private final int REQUEST_CAMERA = 0;
     Spinner dropdown;
-    Button addPhoto;
+//    Button addPhoto;
     ImageView imageView;
 
     @Override
@@ -49,7 +49,7 @@ public class AddItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_item, container, false);
+        return inflater.inflate(R.layout.fragment_add_item2, container, false);
     }
 
     @Override
@@ -59,15 +59,20 @@ public class AddItemFragment extends Fragment {
         String[] categories = new String[]{"Crafts", "Home", "Accessory", "Artwork", "Clothing"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, categories);
         dropdown.setAdapter(adapter);
-        addPhoto = (Button) view.findViewById(R.id.add_photo);
-        addPhoto.setOnClickListener(new View.OnClickListener() {
+//        addPhoto = (Button) view.findViewById(R.id.add_photo);
+//        addPhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                selectImage();
+//            }
+//        });
+        imageView = (ImageView) view.findViewById(R.id.item_image);
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
             }
         });
-        imageView = (ImageView) view.findViewById(R.id.item_image);
-
     }
 
         private void selectImage() {
