@@ -150,7 +150,7 @@ public class ShopProfileFragment extends Fragment {
     private void editShop(final String key) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle("Edit"+key);
-        alertDialog.setMessage("Enter new"+key);
+        alertDialog.setMessage("Enter new: "+key);
 
         input = new EditText(getActivity());
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -324,40 +324,41 @@ public class ShopProfileFragment extends Fragment {
         @Override
         protected void onPostExecute(Object o) {
             try {
-                if (!jsonObject.isNull("profile_pic")) {
-                    picasso.load("http://zeowls.com/bubble/uploads/"+jsonObject.getString("profile_pic")).fit().centerCrop().into(shopImage);
-                }
-                if (jsonObject.isNull("name")) {
-                    shopName.setText("Add Name");
+                if (jsonObject != null) {
+                    if (!jsonObject.isNull("profile_pic")) {
+                        picasso.load("http://zeowls.com/bubble/uploads/" + jsonObject.getString("profile_pic")).fit().centerCrop().into(shopImage);
+                    }
+                    if (jsonObject.isNull("name")) {
+                        shopName.setText("Add Name");
 
-                }else {
-                    shopName.setText(jsonObject.getString("name"));
-                }
+                    } else {
+                        shopName.setText(jsonObject.getString("name"));
+                    }
 
-                if (jsonObject.isNull("description")) {
-                    shopDesc.setText("Add Description");
-                }else {
-                    shopDesc.setText(jsonObject.getString("description"));
-                }
+                    if (jsonObject.isNull("description")) {
+                        shopDesc.setText("Add Description");
+                    } else {
+                        shopDesc.setText(jsonObject.getString("description"));
+                    }
 
-                if (jsonObject.isNull("mobile")) {
-                    shopPhone.setText("Add Mobile");
-                }else {
-                    shopPhone.setText(jsonObject.getString("mobile"));
-                }
+                    if (jsonObject.isNull("mobile")) {
+                        shopPhone.setText("Add Mobile");
+                    } else {
+                        shopPhone.setText(jsonObject.getString("mobile"));
+                    }
 
-                if (jsonObject.isNull("shop_address")) {
-                    shopAddress.setText("Add Shop Address");
-                }else {
-                    shopAddress.setText(jsonObject.getString("shop_address"));
-                }
+                    if (jsonObject.isNull("shop_address")) {
+                        shopAddress.setText("Add Shop Address");
+                    } else {
+                        shopAddress.setText(jsonObject.getString("shop_address"));
+                    }
 
-                if (jsonObject.isNull("owner_email")) {
-                    shopEmail.setText("Add Email");
-                }else {
-                    shopEmail.setText(jsonObject.getString("owner_email"));
+                    if (jsonObject.isNull("owner_email")) {
+                        shopEmail.setText("Add Email");
+                    } else {
+                        shopEmail.setText(jsonObject.getString("owner_email"));
+                    }
                 }
-
                 mView.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.GONE);
             } catch (JSONException e) {

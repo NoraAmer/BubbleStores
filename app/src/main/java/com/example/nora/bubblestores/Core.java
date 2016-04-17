@@ -1,12 +1,7 @@
 package com.example.nora.bubblestores;
 
-/**
- * Created by Nezar Saleh on 4/10/2016.
- */
-
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +28,6 @@ public class Core {
     }
 
     private String Domain = "http://bubble-zeowls.herokuapp.com";
-    private String ImageUploadUrl = "http://zeowls.com/bubble/upload.php";
 
     private String getRequest(String url) throws IOException {
         String data;
@@ -119,7 +113,8 @@ public class Core {
             try {
                 // open a URL connection to the Servlet
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
-                URL url = new URL(ImageUploadUrl);
+                String imageUploadUrl = "http://zeowls.com/bubble/upload.php";
+                URL url = new URL(imageUploadUrl);
                 // Open a HTTP  connection to  the URL
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true); // Allow Inputs
@@ -174,9 +169,9 @@ public class Core {
 
                 Log.i("uploadFile", "HTTP Response is : " + serverResponseMessage + ": " + serverResponseCode);
 
-                if (serverResponseCode == 200) {
+//                if (serverResponseCode == 200) {
 //                    Toast.makeText(context, "File Upload Complete.", Toast.LENGTH_SHORT).show();
-                }
+//                }
 
                 //close the streams //
                 fileInputStream.close();
@@ -195,7 +190,7 @@ public class Core {
         } // End else block
     }
 
-    public int logIn(String email, String password){
+    public int logIn(String email, String password) {
         JSONObject json = new JSONObject();
         int response = 0;
         try {
@@ -245,17 +240,151 @@ public class Core {
         return id;
     }
 
-    public JSONObject getMyShop(int id){
+    public int addItem(int shop_id, String name, String quantity, String price, String description, String short_description, String image, int cat_id) {
+        int id = 0;
+        JSONObject params = new JSONObject();
+        try {
+            if (shop_id != 0) {
+                params.put("shop_id", shop_id);
+
+
+                if (name != null) {
+                    params.put("name", name);
+                } else {
+                    params.put("name", JSONObject.NULL);
+                }
+
+                if (quantity != null) {
+                    params.put("quantity", quantity);
+                } else {
+                    params.put("quantity", JSONObject.NULL);
+                }
+
+                if (price != null) {
+                    params.put("price", price);
+                } else {
+                    params.put("price", JSONObject.NULL);
+                }
+
+                if (description != null) {
+                    params.put("description", description);
+                } else {
+                    params.put("description", JSONObject.NULL);
+                }
+
+                if (short_description != null) {
+                    params.put("short_description", short_description);
+                } else {
+                    params.put("short_description", JSONObject.NULL);
+                }
+
+                if (image != null) {
+                    params.put("image", image);
+                } else {
+                    params.put("image", JSONObject.NULL);
+                }
+
+                if (cat_id != 0) {
+                    params.put("cat_id", cat_id);
+                } else {
+                    params.put("cat_id", JSONObject.NULL);
+                }
+            }
+            Log.d("Params", params.toString());
+            id = postRequest("/newShopItem", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public int editItem(int shop_id, String name, String quantity, String price, String description, String short_description, String image, int cat_id) {
+        int id = 0;
+        JSONObject params = new JSONObject();
+        try {
+            if (shop_id != 0) {
+                params.put("shop_id", shop_id);
+
+
+                if (name != null) {
+                    params.put("name", name);
+                } else {
+                    params.put("name", JSONObject.NULL);
+                }
+
+                if (quantity != null) {
+                    params.put("quantity", quantity);
+                } else {
+                    params.put("quantity", JSONObject.NULL);
+                }
+
+                if (price != null) {
+                    params.put("price", price);
+                } else {
+                    params.put("price", JSONObject.NULL);
+                }
+
+                if (description != null) {
+                    params.put("description", description);
+                } else {
+                    params.put("description", JSONObject.NULL);
+                }
+
+                if (short_description != null) {
+                    params.put("short_description", short_description);
+                } else {
+                    params.put("short_description", JSONObject.NULL);
+                }
+
+                if (image != null) {
+                    params.put("image", image);
+                } else {
+                    params.put("image", JSONObject.NULL);
+                }
+
+                if (cat_id != 0) {
+                    params.put("cat_id", cat_id);
+                } else {
+                    params.put("cat_id", JSONObject.NULL);
+                }
+            }
+            Log.d("Params", params.toString());
+            id = postRequest("/editShopItem", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public JSONObject getAllItems(int shop_id) {
+        JSONObject json = null;
+        JSONArray jsonArray;
+        try {
+            String response = getRequest("/GetShopItems/" + shop_id + "/JSON");
+            if (!response.equals("0")) {
+                json = new JSONObject(response);
+                jsonArray = json.getJSONArray("Items");
+                json = jsonArray.getJSONObject(0);
+            } else {
+                Log.d("getAllItems", response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    public JSONObject getMyShop(int id) {
         JSONObject json = null;
         JSONArray jsonArray;
         try {
             String response = getRequest("/GetShop/" + id + "/JSON");
-            if (!response.equals("0")){
+            if (!response.equals("0")) {
                 json = new JSONObject(response);
                 jsonArray = json.getJSONArray("Shop");
                 json = jsonArray.getJSONObject(0);
-            }else {
-                Log.d("GetShop", response);
+            } else {
+                Log.d("getMyShop", response);
             }
         } catch (Exception e) {
             e.printStackTrace();
