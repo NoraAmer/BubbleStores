@@ -47,7 +47,7 @@ public class RegisterShopFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.register_shop_fr_layout, container, false);
+        return inflater.inflate(R.layout.register_shop_fr_layout_2, container, false);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class RegisterShopFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         dropdown = (Spinner) view.findViewById(R.id.spinner);
         String[] categories = new String[]{"Crafts", "Home", "Accessory", "Artwork", "Clothing"};
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, categories);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.spinner_layout, categories);
         dropdown.setAdapter(adapter);
 
         registerBtn = (Button) view.findViewById(R.id.finishBtn);

@@ -13,7 +13,7 @@ import android.widget.Spinner;
 
 public class AddItemFragment extends Fragment {
 
-//    private final int SELECT_FILE = 1;
+    //    private final int SELECT_FILE = 1;
 //    private final int REQUEST_CAMERA = 0;
     Spinner dropdown;
 //    Button addPhoto;
@@ -48,7 +48,7 @@ public class AddItemFragment extends Fragment {
         dropdown.setAdapter(adapter);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
-        id = preferences.getInt("shopID",0);
+        id = preferences.getInt("shopID", 0);
 //        addPhoto = (Button) view.findViewById(R.id.add_photo);
 //        addPhoto.setOnClickListener(new View.OnClickListener() {
 //            @Override
