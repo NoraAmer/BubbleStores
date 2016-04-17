@@ -184,7 +184,7 @@ public class Core {
                 Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
             } catch (Exception e) {
 //                Toast.makeText(context, "Got Exception : see logcat ", Toast.LENGTH_SHORT).show();
-                Log.e("Exception", e.getMessage());
+                e.printStackTrace();
             }
             return image_url;
         } // End else block
@@ -363,8 +363,6 @@ public class Core {
             String response = getRequest("/GetShopItems/" + shop_id + "/JSON");
             if (!response.equals("0")) {
                 json = new JSONObject(response);
-                jsonArray = json.getJSONArray("Items");
-                json = jsonArray.getJSONObject(0);
             } else {
                 Log.d("getAllItems", response);
             }

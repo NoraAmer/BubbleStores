@@ -44,6 +44,7 @@ public class LoginFragment2 extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.GONE);
         email_text = (EditText) view.findViewById(R.id.email);
         password_text = (EditText) view.findViewById(R.id.password);
         sign_in = (Button) view.findViewById(R.id.email_sign_in_button);
@@ -131,5 +132,11 @@ public class LoginFragment2 extends Fragment {
             response = core.logIn(mEmail,mPassword);
             return null;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.VISIBLE);
     }
 }

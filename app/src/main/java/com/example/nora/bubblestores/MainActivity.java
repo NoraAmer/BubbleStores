@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     AddItemFragment addItemFragment;
     RegisterShopFragment registerShopFragment;
     MainIntroFragment mainIntroFragment;
+    ShopItemsFragment shopItemsFragment;
 
     int id = 0;
 
@@ -150,10 +151,11 @@ public class MainActivity extends AppCompatActivity {
                             editor.apply();
                             MainActivity.this.configureNavigationView();
                             fragmentManager = getSupportFragmentManager();
+                            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                             fragmentTransaction = fragmentManager.beginTransaction();
                             loginFragment = new LoginFragment();
-                            fragmentTransaction.replace(R.id.fragment_main, loginFragment);
-                            fragmentTransaction.addToBackStack(null);
+                            mainIntroFragment = new MainIntroFragment();
+                            fragmentTransaction.replace(R.id.fragment_main, mainIntroFragment);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
                             return true;
@@ -196,6 +198,17 @@ public class MainActivity extends AppCompatActivity {
                             registerShopFragment = new RegisterShopFragment();
                             fragmentTransaction.replace(R.id.fragment_main, registerShopFragment);
                             fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                            mDrawerLayout.closeDrawers();
+                            return true;
+                        }
+
+                        if (menuItem.getItemId() == R.id.Shop_Item) {
+                            fragmentManager = getSupportFragmentManager();
+                            fragmentTransaction = fragmentManager.beginTransaction();
+                            shopItemsFragment = new ShopItemsFragment();
+                            shopItemsFragment.setId(id);
+                            fragmentTransaction.replace(R.id.fragment_main, shopItemsFragment);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
                             return true;

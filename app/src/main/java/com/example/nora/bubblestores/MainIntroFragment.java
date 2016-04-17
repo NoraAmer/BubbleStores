@@ -58,8 +58,7 @@ public class MainIntroFragment extends Fragment {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 loginFragment2 = new LoginFragment2();
                 loginFragment1 = new LoginFragment();
-                fragmentTransaction.replace(R.id.fragment_main, loginFragment2);
-                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.fragment_main, loginFragment2);;
                 fragmentTransaction.commit();
             }
         });
@@ -71,7 +70,6 @@ public class MainIntroFragment extends Fragment {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 registrationFragment = new RegistrationFragment();
                 fragmentTransaction.replace(R.id.fragment_main, registrationFragment);
-                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
