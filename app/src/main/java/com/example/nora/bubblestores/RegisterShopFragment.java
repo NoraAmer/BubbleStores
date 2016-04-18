@@ -192,7 +192,7 @@ public class RegisterShopFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             Core core = new Core(getActivity());
-            int user_id = core.editShop(id, null, null, null, null, null, mName, null, null, null, null, null, null, null, mAddress);
+            int user_id = core.editShop(id, null, null, null, null, null, mName, null, null, mMobile, null, null, null, null, mAddress);
             Log.d("new owner id: ", String.valueOf(user_id));
             return null;
         }

@@ -123,30 +123,43 @@ public class ShopItemsFragment extends Fragment {
         public void onBindViewHolder(ViewHolder holder, final int position) {
             // no-op
             if (items.size() != 0) {
+                ItemDataMode item = items.get(position);
                 ImageView image = (ImageView) holder.itemView.findViewById(R.id.imageView);
                 TextView name = (TextView) holder.itemView.findViewById(R.id.name);
                 TextView desc = (TextView) holder.itemView.findViewById(R.id.description);
                 TextView price = (TextView) holder.itemView.findViewById(R.id.price);
-                name.setText(items.get(position).getName());
-                desc.setText(items.get(position).getDesc());
-                price.setText("$" + items.get(position).getPrice());
-                picasso.load(items.get(position).getImgUrl()).into(image);
+                if (item.getName().equals("null") || item.getName().isEmpty()){
+                    name.setText("No Name");
+                }else {
+                    name.setText(item.getName());
+                }
+                if (item.getDesc().equals("null") || item.getDesc().isEmpty()){
+                    desc.setText("No Description");
+                }else {
+                    desc.setText(item.getDesc());
+                }
+                if (item.getPrice().equals("null") || item.getPrice().isEmpty()){
+                    price.setText("NA");
+                }else {
+                    price.setText("$" + item.getPrice());
+                }
+                picasso.load(item.getImgUrl()).into(image);
             }
 
 
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    FragmentManager fragmentManager = getFragmentManager();
-//                    Item_Detail_Fragment endFragment= new Item_Detail_Fragment();
-//                    endFragment.setId(items.get(position).getId());
-//                    fragmentManager.beginTransaction()
-//                            .add(R.id.fragment_main, endFragment)
-//                            .addToBackStack(null)
-//                            .commit();
-//                }
-//            });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    FragmentManager fragmentManager = getFragmentManager();
+                    ItemDetailFragment endFragment= new ItemDetailFragment();
+                    endFragment.setId(items.get(position).getId());
+                    fragmentManager.beginTransaction()
+                            .add(R.id.fragment_main, endFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
         }
 
         @Override

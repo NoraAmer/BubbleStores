@@ -289,67 +289,10 @@ public class Core {
                 } else {
                     params.put("cat_id", JSONObject.NULL);
                 }
-            }
+
             Log.d("Params", params.toString());
             id = postRequest("/newShopItem", params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return id;
-    }
-
-    public int editItem(int shop_id, String name, String quantity, String price, String description, String short_description, String image, int cat_id) {
-        int id = 0;
-        JSONObject params = new JSONObject();
-        try {
-            if (shop_id != 0) {
-                params.put("shop_id", shop_id);
-
-
-                if (name != null) {
-                    params.put("name", name);
-                } else {
-                    params.put("name", JSONObject.NULL);
-                }
-
-                if (quantity != null) {
-                    params.put("quantity", quantity);
-                } else {
-                    params.put("quantity", JSONObject.NULL);
-                }
-
-                if (price != null) {
-                    params.put("price", price);
-                } else {
-                    params.put("price", JSONObject.NULL);
-                }
-
-                if (description != null) {
-                    params.put("description", description);
-                } else {
-                    params.put("description", JSONObject.NULL);
-                }
-
-                if (short_description != null) {
-                    params.put("short_description", short_description);
-                } else {
-                    params.put("short_description", JSONObject.NULL);
-                }
-
-                if (image != null) {
-                    params.put("image", image);
-                } else {
-                    params.put("image", JSONObject.NULL);
-                }
-
-                if (cat_id != 0) {
-                    params.put("cat_id", cat_id);
-                } else {
-                    params.put("cat_id", JSONObject.NULL);
-                }
             }
-            Log.d("Params", params.toString());
-            id = postRequest("/editShopItem", params);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -383,6 +326,25 @@ public class Core {
                 json = jsonArray.getJSONObject(0);
             } else {
                 Log.d("getMyShop", response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        putMoviesDB(json);
+        return json;
+    }
+
+    public JSONObject getItem(int id) {
+        JSONObject json = null;
+        JSONArray jsonArray;
+        try {
+            String response = getRequest("/GetItem/" + id + "/JSON");
+            if (!response.equals("0")) {
+                json = new JSONObject(response);
+                jsonArray = json.getJSONArray("Items");
+                json = jsonArray.getJSONObject(0);
+            } else {
+                Log.d("getItem", response);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -487,6 +449,66 @@ public class Core {
 
                 Log.d("Params", params.toString());
                 response = postRequest("/editShop", params);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public int editItem(int shop_id, int item_id, String name, String description, String short_description, String quantity, String price, String image, int cat_id) {
+        JSONObject params = new JSONObject();
+        int response = 0;
+        try {
+
+            if (shop_id != 0 && item_id != 0) {
+                params.put("shop_id", shop_id);
+                params.put("item_id", item_id);
+
+                if (name != null) {
+                    params.put("name", name);
+                } else {
+                    params.put("name", JSONObject.NULL);
+                }
+
+                if (description != null) {
+                    params.put("description", description);
+                } else {
+                    params.put("description", JSONObject.NULL);
+                }
+
+                if (short_description != null) {
+                    params.put("short_description", short_description);
+                } else {
+                    params.put("short_description", JSONObject.NULL);
+                }
+
+                if (quantity != null) {
+                    params.put("quantity", quantity);
+                } else {
+                    params.put("quantity", JSONObject.NULL);
+                }
+
+                if (price != null) {
+                    params.put("price", price);
+                } else {
+                    params.put("price", JSONObject.NULL);
+                }
+
+                if (image != null) {
+                    params.put("image", image);
+                } else {
+                    params.put("image", JSONObject.NULL);
+                }
+
+                if (cat_id != 0) {
+                    params.put("cat_id", cat_id);
+                } else {
+                    params.put("cat_id", JSONObject.NULL);
+                }
+
+                Log.d("Params", params.toString());
+                response = postRequest("/editShopItem", params);
             }
         } catch (Exception e) {
             e.printStackTrace();
