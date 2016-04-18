@@ -118,6 +118,7 @@ public class LoginFragment2 extends Fragment {
                 editor.apply();
                 ((MainActivity) getActivity()).configureNavigationView();
                 fragmentManager = getFragmentManager();
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentTransaction = fragmentManager.beginTransaction();
                 shopProfileFragment = new ShopProfileFragment();
                 fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);

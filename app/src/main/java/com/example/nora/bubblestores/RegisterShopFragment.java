@@ -26,13 +26,13 @@ public class RegisterShopFragment extends Fragment {
     Spinner dropdown;
     EditText nameText, mobileText, addressText;
     Button add_Profile_Photo, add_Cover_Photo, registerBtn;
-//    ImageView Profile_Photo_Im, Cover_Photo_Im;
+    //    ImageView Profile_Photo_Im, Cover_Photo_Im;
     int GlobalCode = 0;
     private Core core;
 
     private int id = 0;
-    private String name, profile_pic,  cover_pic, mobile,
-    short_description, description, address;
+    private String name, profile_pic, cover_pic, mobile,
+            short_description, description, address;
     private int cat_id;
     private String longitude, latitude;
 
@@ -53,16 +53,16 @@ public class RegisterShopFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.GONE);
         dropdown = (Spinner) view.findViewById(R.id.spinner);
         String[] categories = new String[]{"Crafts", "Home", "Accessory", "Artwork", "Clothing"};
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.spinner_layout, categories);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_layout, categories);
         dropdown.setAdapter(adapter);
 
         registerBtn = (Button) view.findViewById(R.id.finishBtn);
         nameText = (EditText) view.findViewById(R.id.name_text);
         mobileText = (EditText) view.findViewById(R.id.mobile_text);
         addressText = (EditText) view.findViewById(R.id.addressText);
-
 
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +101,7 @@ public class RegisterShopFragment extends Fragment {
                     // Show a progress spinner, and kick off a background task to
                     // perform the user login attempt.
                     mAuthTask = new shopRegisterTask(name, null, null, mobile, null, null, address, 0, id
-                    ,null, null);
+                            , null, null);
                     mAuthTask.execute();
                 }
             }
@@ -155,7 +155,7 @@ public class RegisterShopFragment extends Fragment {
         ShopProfileFragment shopProfileFragment;
 
         shopRegisterTask(String name, String profile_pic, String cover_pic, String mobile,
-                         String short_description, String description, String address ,int cat_id,
+                         String short_description, String description, String address, int cat_id,
                          int owner_id, String longitude, String latitude) {
             mName = name;
             mProfile = profile_pic;
@@ -172,17 +172,18 @@ public class RegisterShopFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (id > 0){
+            if (id > 0) {
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("Credentials", Context.MODE_PRIVATE).edit();
                 editor.putInt("shopID", id);
                 editor.apply();
                 fragmentManager = getFragmentManager();
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentTransaction = fragmentManager.beginTransaction();
                 shopProfileFragment = new ShopProfileFragment();
 //                shopProfileFragment.setId(id);
                 fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
                 fragmentTransaction.commit();
-            }else {
+            } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
             }
             super.onPostExecute(aVoid);
@@ -288,4 +289,12 @@ public class RegisterShopFragment extends Fragment {
 //            }
 //        }
 //    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.VISIBLE);
+    }
+
 }

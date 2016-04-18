@@ -12,7 +12,7 @@
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textSize">20sp</item>
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">@color/test</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">@color/white</item>
 

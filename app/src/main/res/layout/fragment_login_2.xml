@@ -1,9 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/email_login_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-        android:background="#00BCD4">
+    android:background="#00BCD4">
 
     <!-- Login progress -->
 
@@ -13,9 +14,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/giftintro"
         android:layout_marginTop="50dp"
-        />
+        android:src="@drawable/giftintro" />
 
 
     <TextView
@@ -54,9 +54,9 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/giftintro"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:src="@drawable/giftintro"
 
                 />
 
@@ -93,20 +93,20 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/giftintro"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                />
+                android:src="@drawable/giftintro" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/TextLabel">
 
-                <EditText
+                <com.example.nora.bubblestores.PasswordShow.PasswordEditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="start"
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
@@ -116,9 +116,13 @@
                     android:singleLine="true"
                     android:textColor="#727272"
                     android:textColorHint="@color/white"
+                    android:textCursorDrawable="@null"
+                    app:pet_nonMonospaceFont="true"
 
                     />
+
             </android.support.design.widget.TextInputLayout>
+
         </LinearLayout>
 
 

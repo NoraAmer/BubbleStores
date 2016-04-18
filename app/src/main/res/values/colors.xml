@@ -16,4 +16,8 @@
     <color name="secondary_text">#727272</color>
     <color name="divider_color">#B6B6B6</color>
 
+    <color name="test">#ff5521</color>
+    <color name="test2">#263238</color>
+    <color name="test3">#37474F</color>
+    <color name="test4">#00BCD4</color>
 </resources>

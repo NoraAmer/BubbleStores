@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +30,8 @@ public class RegistrationFragment extends Fragment {
     Button birthday, next;
     EditText name, email, password, confirmPassword;
     static int year, month, day;
+    TextInputLayout Name_Txt_Input_Layout;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,13 +75,25 @@ public class RegistrationFragment extends Fragment {
             // Do something with the date chosen by the user
         }
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.GONE);
         name = (EditText) view.findViewById(R.id.nameText);
         email = (EditText) view.findViewById(R.id.emailText);
         password = (EditText) view.findViewById(R.id.passwordText);
         confirmPassword = (EditText) view.findViewById(R.id.confirmPasswordText);
+//        Name_Txt_Input_Layout = (TextInputLayout) view.findViewById(R.id.Name_Txt_Input_Layout);
+////        Name_Txt_Input_Layout.setErrorEnabled(true);
+////        Name_Txt_Input_Layout.setError("Enter Your name PLease");
+//        if (Name_Txt_Input_Layout.isErrorEnabled()){
+//            Name_Txt_Input_Layout.setErrorEnabled(true);
+//            Name_Txt_Input_Layout.setError("Enter Your Name");
+//        }
+
+
+
 
         birthday = (Button) view.findViewById(R.id.birthday);
         birthday.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +149,7 @@ public class RegistrationFragment extends Fragment {
                     confirmPassword.setError(getString(R.string.error_invalid_password));
                     focusView = confirmPassword;
                     cancel = true;
-                } else if ( !passwordString.equals(confirmPasswordString) ){
+                } else if (!passwordString.equals(confirmPasswordString)) {
                     confirmPassword.setError(getString(R.string.error_confirm_passord_not_identical));
                     focusView = confirmPassword;
                     cancel = true;
@@ -180,9 +195,9 @@ public class RegistrationFragment extends Fragment {
                 registerShopFragment.setId(id);
                 fragmentTransaction.replace(R.id.fragment_main, registerShopFragment);
                 fragmentTransaction.commit();
-            }else if(id == -2) {
+            } else if (id == -2) {
 
-            }else {
+            } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
             }
             super.onPostExecute(aVoid);
@@ -206,5 +221,11 @@ public class RegistrationFragment extends Fragment {
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.VISIBLE);
     }
 }
