@@ -94,6 +94,7 @@ public class LoginFragment2 extends Fragment {
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         ShopProfileFragment shopProfileFragment;
+        ShopHomePage shopHomePage;
 
         SignInTask(String email, String password) {
             mEmail = email;
@@ -117,10 +118,11 @@ public class LoginFragment2 extends Fragment {
                 editor.putInt("shopID", response);
                 editor.apply();
                 ((MainActivity) getActivity()).configureNavigationView();
-                fragmentManager = getFragmentManager();
+                fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentTransaction = fragmentManager.beginTransaction();
-                shopProfileFragment = new ShopProfileFragment();
+                shopHomePage = new ShopHomePage();
+                shopProfileFragment =  new ShopProfileFragment();
                 fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
                 fragmentTransaction.commit();
             }

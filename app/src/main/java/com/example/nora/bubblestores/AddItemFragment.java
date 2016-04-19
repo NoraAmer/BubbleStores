@@ -62,9 +62,15 @@ public class AddItemFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).toolbar.setTitle("Add Item");
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.GONE);
         super.onActivityCreated(savedInstanceState);
         core = new Core(getActivity());
+    }
+
+    @Override
+    public void onPause() {
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.VISIBLE);
+        super.onPause();
     }
 
     @Override
@@ -266,9 +272,10 @@ public class AddItemFragment extends Fragment {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 shopItemsFragment = new ShopItemsFragment();
                 shopItemsFragment.setId(shop_id);
-                fragmentTransaction.replace(R.id.fragment_main, shopItemsFragment);
+                ShopHomePage shopHomePage =  new ShopHomePage();
+                fragmentTransaction.replace(R.id.fragment_main, shopHomePage);
                 fragmentTransaction.commit();
-            }else {
+            } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
             }
 
@@ -302,4 +309,6 @@ public class AddItemFragment extends Fragment {
             return null;
         }
     }
+
+
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -128,19 +129,19 @@ public class ShopItemsFragment extends Fragment {
                 TextView name = (TextView) holder.itemView.findViewById(R.id.name);
                 TextView desc = (TextView) holder.itemView.findViewById(R.id.description);
                 TextView price = (TextView) holder.itemView.findViewById(R.id.price);
-                if (item.getName().equals("null") || item.getName().isEmpty()){
+                if (item.getName().equals("null") || item.getName().isEmpty()) {
                     name.setText("No Name");
-                }else {
+                } else {
                     name.setText(item.getName());
                 }
-                if (item.getDesc().equals("null") || item.getDesc().isEmpty()){
+                if (item.getDesc().equals("null") || item.getDesc().isEmpty()) {
                     desc.setText("No Description");
-                }else {
+                } else {
                     desc.setText(item.getDesc());
                 }
-                if (item.getPrice().equals("null") || item.getPrice().isEmpty()){
+                if (item.getPrice().equals("null") || item.getPrice().isEmpty()) {
                     price.setText("NA");
-                }else {
+                } else {
                     price.setText("$" + item.getPrice());
                 }
                 picasso.load(item.getImgUrl()).into(image);
@@ -152,7 +153,7 @@ public class ShopItemsFragment extends Fragment {
                 public void onClick(View v) {
 
                     FragmentManager fragmentManager = getFragmentManager();
-                    ItemDetailFragment endFragment= new ItemDetailFragment();
+                    ItemDetailFragment endFragment = new ItemDetailFragment();
                     endFragment.setId(items.get(position).getId());
                     fragmentManager.beginTransaction()
                             .add(R.id.fragment_main, endFragment)
@@ -167,4 +168,29 @@ public class ShopItemsFragment extends Fragment {
             return items.size();
         }
     }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.VISIBLE);
+
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).toolbar.setTitle("Items");
+
+    }
+
+    @Override
+    public void onPause() {
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.VISIBLE);
+        super.onPause();
+    }
+
+
 }

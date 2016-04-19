@@ -153,6 +153,7 @@ public class RegisterShopFragment extends Fragment {
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         ShopProfileFragment shopProfileFragment;
+        ShopHomePage shopHomePage;
 
         shopRegisterTask(String name, String profile_pic, String cover_pic, String mobile,
                          String short_description, String description, String address, int cat_id,
@@ -176,12 +177,14 @@ public class RegisterShopFragment extends Fragment {
                 SharedPreferences.Editor editor = getActivity().getSharedPreferences("Credentials", Context.MODE_PRIVATE).edit();
                 editor.putInt("shopID", id);
                 editor.apply();
+                ((MainActivity) getActivity()).configureNavigationView();
                 fragmentManager = getFragmentManager();
                 fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentTransaction = fragmentManager.beginTransaction();
                 shopProfileFragment = new ShopProfileFragment();
+                shopHomePage = new ShopHomePage();
 //                shopProfileFragment.setId(id);
-                fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
+                fragmentTransaction.replace(R.id.fragment_main, shopHomePage);
                 fragmentTransaction.commit();
             } else {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();

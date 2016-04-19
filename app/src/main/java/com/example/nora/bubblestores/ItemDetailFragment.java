@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -41,9 +42,9 @@ public class ItemDetailFragment extends Fragment {
 
     private int shop_id, item_id;
     ImageView item_image;
-    TextView item_name, item_desc, item_price;
+    TextView item_name, item_desc, item_price, Item_Shop_name;
 
-    private LinearLayout mView;
+    private RelativeLayout mView;
     private ProgressBar mProgressBar;
 
     Core core;
@@ -64,32 +65,40 @@ public class ItemDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_details, container, false);
+        return inflater.inflate(R.layout.fragment_item_details_2, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).toolbar.setTitle("Profile");
+        ((MainActivity) getActivity()).toolbar.setTitle("Item Details");
         core = new Core(getActivity());
         picasso = Picasso.with(getActivity());
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        item_image = (ImageView) view.findViewById(R.id.shop_image);
-        item_name = (TextView) view.findViewById(R.id.shop_name);
-        item_desc = (TextView) view.findViewById(R.id.shop_desc);
-        item_price = (TextView) view.findViewById(R.id.shop_phone);
+    public void onPause() {
+        super.onPause();
+        ((MainActivity) getActivity()).toolbar.setTitle("Items");
 
-        mView = (LinearLayout) view.findViewById(R.id.layout);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        item_image = (ImageView) view.findViewById(R.id.Item_image);
+        item_name = (TextView) view.findViewById(R.id.Item_Name);
+        item_desc = (TextView) view.findViewById(R.id.Item_desc);
+        item_price = (TextView) view.findViewById(R.id.Item_Price);
+        Item_Shop_name = (TextView) view.findViewById(R.id.Item_Shop_name);
+
+        mView = (RelativeLayout) view.findViewById(R.id.layout);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
 
         mView.setVisibility(View.GONE);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
-        shop_id = preferences.getInt("shopID",0);
-        if (item_id != 0){
+        shop_id = preferences.getInt("shopID", 0);
+        if (item_id != 0) {
             new get_item_task().execute();
         }
 
@@ -130,8 +139,8 @@ public class ItemDetailFragment extends Fragment {
 
     private void edit_item(final String key, String value) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle("Edit"+key);
-        alertDialog.setMessage("Enter new: "+key);
+        alertDialog.setTitle("Edit" + key);
+        alertDialog.setMessage("Enter new: " + key);
 
         input = new EditText(getActivity());
         input.setText(value);
@@ -236,9 +245,9 @@ public class ItemDetailFragment extends Fragment {
         }
     }
 
-    private class editShopTask extends AsyncTask{
+    private class editShopTask extends AsyncTask {
 
-        String text,key;
+        String text, key;
 
         @Override
         protected void onPreExecute() {
@@ -258,22 +267,22 @@ public class ItemDetailFragment extends Fragment {
 
         @Override
         protected Object doInBackground(Object[] params) {
-            if (key.equals("Name")){
+            if (key.equals("Name")) {
                 core.editItem(shop_id, item_id, text, null, null, null, null, null, 1);
             }
-            if (key.equals("Description")){
+            if (key.equals("Description")) {
                 core.editItem(shop_id, item_id, null, text, null, null, null, null, 1);
             }
-            if (key.equals("Price")){
+            if (key.equals("Price")) {
                 core.editItem(shop_id, item_id, null, null, null, null, text, null, 1);
             }
             return null;
         }
     }
 
-    private class edit_item_image_task extends AsyncTask{
+    private class edit_item_image_task extends AsyncTask {
 
-        String path,pathUploaded;
+        String path, pathUploaded;
 
         public edit_item_image_task(String path) {
             this.path = path;
@@ -293,7 +302,7 @@ public class ItemDetailFragment extends Fragment {
         }
     }
 
-    private class get_item_task extends AsyncTask{
+    private class get_item_task extends AsyncTask {
 
         JSONObject jsonObject = null;
 
@@ -320,7 +329,12 @@ public class ItemDetailFragment extends Fragment {
                     if (jsonObject.isNull("price")) {
                         item_price.setText("Add price");
                     } else {
-                        item_price.setText("Price: "+ jsonObject.getString("price")+"$");
+                        item_price.setText("Price: " + jsonObject.getString("price") + "$");
+                    }
+                    if (jsonObject.isNull("shop_name")) {
+                        Item_Shop_name.setText("");
+                    } else {
+                        Item_Shop_name.setText(jsonObject.getString("shop_name"));
                     }
 
                 }

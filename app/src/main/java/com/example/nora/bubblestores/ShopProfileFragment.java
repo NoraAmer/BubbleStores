@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +44,9 @@ public class ShopProfileFragment extends Fragment {
 
     private int id;
     ImageView shopImage;
-    TextView shopName, shopDesc, shopPhone, shopEmail, shopAddress;
+    TextView shopName, shopDesc, shopPhone, shopEmail, shopAddress,Shop_Profile_Short_Desc_tv;
 
-    private LinearLayout mView;
+    private RelativeLayout mView;
     private ProgressBar mProgressBar;
 
     Core core;
@@ -53,9 +54,7 @@ public class ShopProfileFragment extends Fragment {
 
     EditText input;
 
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,15 +65,24 @@ public class ShopProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop_profile, container, false);
+        return inflater.inflate(R.layout.fragment_shop_profile_3, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).toolbar.setTitle("Profile");
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.VISIBLE);
+
+
         core = new Core(getActivity());
         picasso = Picasso.with(getActivity());
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).toolbar.setTitle("Buuble Stores");
+
     }
 
     @Override
@@ -85,17 +93,26 @@ public class ShopProfileFragment extends Fragment {
         shopPhone = (TextView) view.findViewById(R.id.shop_phone);
         shopEmail = (TextView) view.findViewById(R.id.shop_email);
         shopAddress = (TextView) view.findViewById(R.id.shop_address);
+        Shop_Profile_Short_Desc_tv = (TextView) view.findViewById(R.id.Shop_Profile_Short_Desc_tv);
 
-        mView = (LinearLayout) view.findViewById(R.id.layout);
+        mView = (RelativeLayout) view.findViewById(R.id.layout);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
 
         mView.setVisibility(View.GONE);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
-        id = preferences.getInt("shopID",0);
-        if (id != 0){
+        id = preferences.getInt("shopID", 0);
+        if (id != 0) {
             new getShopTask().execute();
         }
+
+        Shop_Profile_Short_Desc_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editShop("Slogan", Shop_Profile_Short_Desc_tv.getText().toString());
+
+            }
+        });
 
         shopImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,8 +166,8 @@ public class ShopProfileFragment extends Fragment {
 
     private void editShop(final String key, String value) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle("Edit"+key);
-        alertDialog.setMessage("Enter new: "+key);
+        alertDialog.setTitle("Edit" + key);
+        alertDialog.setMessage("Enter new: " + key);
 
         input = new EditText(getActivity());
         input.setText(value);
@@ -255,9 +272,9 @@ public class ShopProfileFragment extends Fragment {
         }
     }
 
-    private class editShopTask extends AsyncTask{
+    private class editShopTask extends AsyncTask {
 
-        String text,key;
+        String text, key;
 
         @Override
         protected void onPreExecute() {
@@ -277,28 +294,30 @@ public class ShopProfileFragment extends Fragment {
 
         @Override
         protected Object doInBackground(Object[] params) {
-            if (key.equals("Name")){
-                core.editShop(id,null,null,null,null,null,text,null,null,null,null,null,null,null,null);
+            if (key.equals("Name")) {
+                core.editShop(id, null, null, null, null, null, text, null, null, null, null, null, null, null, null);
             }
-            if (key.equals("Description")){
-                core.editShop(id,null,null,null,null,null,null,null,null,null,null,text,null,null,null);
+            if (key.equals("Description")) {
+                core.editShop(id, null, null, null, null, null, null, null, null, null, null, text, null, null, null);
             }
-            if (key.equals("Phone")){
-                core.editShop(id,null,null,null,null,null,null,null,null,text,null,null,null,null,null);
+            if (key.equals("Phone")) {
+                core.editShop(id, null, null, null, null, null, null, null, null, text, null, null, null, null, null);
             }
-            if (key.equals("Email")){
-                core.editShop(id,null,text,null,null,null,null,null,null,null,null,null,null,null,null);
+            if (key.equals("Email")) {
+                core.editShop(id, null, text, null, null, null, null, null, null, null, null, null, null, null, null);
             }
-            if (key.equals("Address")){
-                core.editShop(id,null,null,null,null,null,null,null,null,null,null,null,null,null,text);
+            if (key.equals("Address")) {
+                core.editShop(id, null, null, null, null, null, null, null, null, null, null, null, null, null, text);
+            }if (key.equals("Slogan")) {
+                core.editShop(id, null, null, null, null, null, null, null, null, null, text, null, null, null, null);
             }
             return null;
         }
     }
 
-    private class editShopImageTask extends AsyncTask{
+    private class editShopImageTask extends AsyncTask {
 
-        String path,pathUploaded;
+        String path, pathUploaded;
 
         public editShopImageTask(String path) {
             this.path = path;
@@ -313,12 +332,12 @@ public class ShopProfileFragment extends Fragment {
         @Override
         protected Object doInBackground(Object[] params) {
             pathUploaded = core.uploadImage(path);
-            core.editShop(id, null,null,null,null,null,null,pathUploaded,null,null,null,null,null,null,null);
+            core.editShop(id, null, null, null, null, null, null, pathUploaded, null, null, null, null, null, null, null);
             return null;
         }
     }
 
-    private class getShopTask extends AsyncTask{
+    private class getShopTask extends AsyncTask {
 
         JSONObject jsonObject = null;
 
@@ -340,6 +359,12 @@ public class ShopProfileFragment extends Fragment {
                         shopDesc.setText("Add Description");
                     } else {
                         shopDesc.setText(jsonObject.getString("description"));
+                    }
+
+                    if (jsonObject.isNull("short_description")) {
+                        Shop_Profile_Short_Desc_tv.setText("Add Slogan");
+                    } else {
+                        Shop_Profile_Short_Desc_tv.setText(jsonObject.getString("short_description"));
                     }
 
                     if (jsonObject.isNull("mobile")) {
@@ -374,5 +399,12 @@ public class ShopProfileFragment extends Fragment {
             jsonObject = core.getMyShop(id);
             return null;
         }
+    }
+
+
+    @Override
+    public void onPause() {
+        ((MainActivity) getActivity()).toolbar.setVisibility(View.GONE);
+        super.onPause();
     }
 }

@@ -35,12 +35,13 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     ShopProfileFragment shopProfileFragment;
-    LoginFragment loginFragment;
+    LoginFragment2 loginFragment;
     RegistrationFragment registrationFragment;
     AddItemFragment addItemFragment;
     RegisterShopFragment registerShopFragment;
     MainIntroFragment mainIntroFragment;
     ShopItemsFragment shopItemsFragment;
+    ShopHomePage shopHomePage;
 
     int id = 0;
 
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         if (id != 0) {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
+            shopHomePage = new ShopHomePage();
             shopProfileFragment = new ShopProfileFragment();
             fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
             fragmentTransaction.commit();
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         MenuItem addItem = navigationView.getMenu().findItem(R.id.navAddItemBTN);
 
         registerShop.setVisible(false);
-        if (id == 0){
+        if (id == 0) {
             shopNameNav.setVisibility(View.GONE);
             imageViewNav.setVisibility(View.GONE);
             profile.setVisible(false);
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             register.setVisible(true);
             addItem.setVisible(false);
             logout.setVisible(false);
-        }else {
+        } else {
             shopNameNav.setVisibility(View.VISIBLE);
             imageViewNav.setVisibility(View.VISIBLE);
             profile.setVisible(true);
@@ -136,14 +138,18 @@ public class MainActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
 
                         if (menuItem.getItemId() == R.id.navProfileBTN) {
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            shopProfileFragment = new ShopProfileFragment();
-                            fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
-                            fragmentTransaction.addToBackStack(null);
-                            fragmentTransaction.commit();
-                            mDrawerLayout.closeDrawers();
-                            return true;
+
+//                            if (id!=0) {
+//                                fragmentManager = getSupportFragmentManager();
+//                                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                                fragmentTransaction = fragmentManager.beginTransaction();
+//                                shopHomePage = new ShopHomePage();
+//                                fragmentTransaction.replace(R.id.fragment_main, shopHomePage);
+//                                fragmentTransaction.commit();
+//                                mDrawerLayout.closeDrawers();
+//                                return true;
+//                            }
+
                         }
                         if (menuItem.getItemId() == R.id.navLogoutBTN) {
                             SharedPreferences.Editor editor = getSharedPreferences("Credentials", Context.MODE_PRIVATE).edit();
@@ -153,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
                             fragmentManager = getSupportFragmentManager();
                             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                             fragmentTransaction = fragmentManager.beginTransaction();
-                            loginFragment = new LoginFragment();
                             mainIntroFragment = new MainIntroFragment();
                             fragmentTransaction.replace(R.id.fragment_main, mainIntroFragment);
                             fragmentTransaction.commit();
@@ -163,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                         if (menuItem.getItemId() == R.id.navLoginBTN) {
                             fragmentManager = getSupportFragmentManager();
                             fragmentTransaction = fragmentManager.beginTransaction();
-                            loginFragment = new LoginFragment();
+                            loginFragment = new LoginFragment2();
                             fragmentTransaction.replace(R.id.fragment_main, loginFragment);
                             fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
@@ -185,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                             fragmentManager = getSupportFragmentManager();
                             fragmentTransaction = fragmentManager.beginTransaction();
                             addItemFragment = new AddItemFragment();
-                            fragmentTransaction.replace(R.id.fragment_main, addItemFragment);
+                            fragmentTransaction.add(R.id.fragment_main, addItemFragment);
                             fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
@@ -209,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
                             shopItemsFragment = new ShopItemsFragment();
                             shopItemsFragment.setId(id);
                             fragmentTransaction.replace(R.id.fragment_main, shopItemsFragment);
+                            fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
                             return true;

@@ -4,7 +4,8 @@
         <item
             android:id="@+id/navProfileBTN"
             android:tint="@color/button_grey"
-            android:title="Shop Profile" />
+            android:title="Shop Profile"
+            />
         <item
             android:id="@+id/navLoginBTN"
             android:tint="@color/button_grey"
@@ -32,7 +33,8 @@
         <item
             android:id="@+id/Shop_Item"
             android:tint="@color/button_grey"
-            android:title="Items"/>
+            android:title="Items"
+            />
 
     </group>
 </menu>
