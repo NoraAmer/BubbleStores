@@ -62,14 +62,12 @@ public class AddItemFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).toolbar.setVisibility(View.GONE);
         super.onActivityCreated(savedInstanceState);
         core = new Core(getActivity());
     }
 
     @Override
     public void onPause() {
-        ((MainActivity) getActivity()).toolbar.setVisibility(View.VISIBLE);
         super.onPause();
     }
 

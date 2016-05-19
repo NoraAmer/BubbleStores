@@ -1,13 +1,11 @@
 package com.example.nora.bubblestores;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +27,7 @@ import java.util.ArrayList;
 /**
  * Created by nezar on 4/17/16.
  */
-public class ShopItemsFragment extends Fragment {
+public class Shop_Order_Fragment extends Fragment {
 
 
     static ArrayList<ItemDataMode> items = new ArrayList<>();
@@ -83,7 +81,7 @@ public class ShopItemsFragment extends Fragment {
 
             try {
                 Core core = new Core(getContext());
-                JSONObject itemsJSON = core.getAllItems(id);
+                JSONObject itemsJSON = core.getShopOrdersByShopId(id);
                 if (core.getAllItems(id) != null && itemsJSON.getJSONArray("Items").length() != 0) {
                     Log.d("json", core.getAllItems(id).toString());
                     for (int i = 0; i < itemsJSON.getJSONArray("Items").length(); i++) {
@@ -111,7 +109,7 @@ public class ShopItemsFragment extends Fragment {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.category_item_card, parent, false));
+            super(inflater.inflate(R.layout.shop_order_item_card, parent, false));
 
         }
     }

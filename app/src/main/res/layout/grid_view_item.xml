@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerHorizontal="true"
+
+    >
+
+
+    <ImageView
+        android:id="@+id/Grid_Image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/giftintro"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/Grid_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Grid_Image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Name 1 sad as as as "
+        android:textColor="@color/colorPrimaryDark2"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

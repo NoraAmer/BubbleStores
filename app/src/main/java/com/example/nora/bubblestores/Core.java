@@ -315,6 +315,22 @@ public class Core {
         return json;
     }
 
+    public JSONObject getShopOrdersByShopId(int shop_id) {
+        JSONObject json = null;
+        JSONArray jsonArray;
+        try {
+            String response = getRequest("/GetShopItems/" + shop_id + "/JSON");
+            if (!response.equals("0")) {
+                json = new JSONObject(response);
+            } else {
+                Log.d("getAllItems", response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
     public JSONObject getMyShop(int id) {
         JSONObject json = null;
         JSONArray jsonArray;

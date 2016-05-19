@@ -404,7 +404,6 @@ public class ShopProfileFragment extends Fragment {
 
     @Override
     public void onPause() {
-        ((MainActivity) getActivity()).toolbar.setVisibility(View.GONE);
         super.onPause();
     }
 }

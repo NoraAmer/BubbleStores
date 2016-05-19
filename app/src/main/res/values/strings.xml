@@ -35,4 +35,11 @@
 Ask especially collecting terminated may son expression. Extremely eagerness principle estimable own was man. Men received far his dashwood subjects new. My sufficient surrounded an companions dispatched in on. Connection too   </string>
 
 
+    <string-array name="Home_Array">
+        <item>Profile</item>
+        <item>Add item</item>
+        <item>All items</item>
+        <item>Orders</item>
+    </string-array>
+
 </resources>

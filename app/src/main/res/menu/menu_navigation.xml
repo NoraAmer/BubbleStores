@@ -1,40 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/navProfileBTN"
-            android:tint="@color/button_grey"
-            android:title="Shop Profile"
-            />
-        <item
-            android:id="@+id/navLoginBTN"
-            android:tint="@color/button_grey"
-            android:title="Login" />
-        <item
-            android:id="@+id/navRegistrationBTN"
-            android:tint="@color/button_grey"
-            android:title="Register" />
 
         <item
-            android:id="@+id/navAddItemBTN"
+            android:id="@+id/navOrdersBtn"
             android:tint="@color/button_grey"
-            android:title="Add Item"/>
+            android:title="My Orders"/>
 
-        <item
-            android:id="@+id/navShopRegiter"
-            android:tint="@color/button_grey"
-            android:title="Shop Register"/>
 
         <item
             android:id="@+id/navLogoutBTN"
             android:tint="@color/button_grey"
             android:title="Logout"/>
 
-        <item
-            android:id="@+id/Shop_Item"
-            android:tint="@color/button_grey"
-            android:title="Items"
-            />
 
     </group>
 </menu>

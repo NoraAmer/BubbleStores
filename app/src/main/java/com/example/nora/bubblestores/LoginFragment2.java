@@ -26,7 +26,7 @@ public class LoginFragment2 extends Fragment {
 
     String email,password;
 
-    SignInTask mAuthTask;
+        SignInTask mAuthTask;
     View focusView;
 
     @Override
@@ -94,7 +94,7 @@ public class LoginFragment2 extends Fragment {
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         ShopProfileFragment shopProfileFragment;
-        ShopHomePage shopHomePage;
+        MainGridViewFragment mainGridViewFragment;
 
         SignInTask(String email, String password) {
             mEmail = email;
@@ -121,9 +121,9 @@ public class LoginFragment2 extends Fragment {
                 fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentTransaction = fragmentManager.beginTransaction();
-                shopHomePage = new ShopHomePage();
+                mainGridViewFragment =  new MainGridViewFragment();
                 shopProfileFragment =  new ShopProfileFragment();
-                fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
+                fragmentTransaction.replace(R.id.fragment_main, mainGridViewFragment,"MainGridViewFragment");
                 fragmentTransaction.commit();
             }
             super.onPostExecute(aVoid);

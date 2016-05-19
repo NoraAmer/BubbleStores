@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     MainIntroFragment mainIntroFragment;
     ShopItemsFragment shopItemsFragment;
     ShopHomePage shopHomePage;
+    MainGridViewFragment mainGridViewFragment;
 
     int id = 0;
 
@@ -63,9 +64,14 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction = fragmentManager.beginTransaction();
             shopHomePage = new ShopHomePage();
             shopProfileFragment = new ShopProfileFragment();
-            fragmentTransaction.replace(R.id.fragment_main, shopProfileFragment);
+            mainGridViewFragment = new MainGridViewFragment();
+            fragmentTransaction.replace(R.id.fragment_main, mainGridViewFragment,"MainGridViewFragment");
             fragmentTransaction.commit();
             mDrawerLayout.closeDrawers();
+
+
+
+
         } else {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
@@ -103,31 +109,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
         id = preferences.getInt("shopID", 0);
 
-        MenuItem profile = navigationView.getMenu().findItem(R.id.navProfileBTN);
-        MenuItem login = navigationView.getMenu().findItem(R.id.navLoginBTN);
         MenuItem logout = navigationView.getMenu().findItem(R.id.navLogoutBTN);
-        MenuItem register = navigationView.getMenu().findItem(R.id.navRegistrationBTN);
-        MenuItem registerShop = navigationView.getMenu().findItem(R.id.navShopRegiter);
-        MenuItem addItem = navigationView.getMenu().findItem(R.id.navAddItemBTN);
 
-        registerShop.setVisible(false);
-        if (id == 0) {
-            shopNameNav.setVisibility(View.GONE);
-            imageViewNav.setVisibility(View.GONE);
-            profile.setVisible(false);
-            login.setVisible(true);
-            register.setVisible(true);
-            addItem.setVisible(false);
-            logout.setVisible(false);
-        } else {
             shopNameNav.setVisibility(View.VISIBLE);
             imageViewNav.setVisibility(View.VISIBLE);
-            profile.setVisible(true);
-            login.setVisible(false);
-            register.setVisible(false);
-            addItem.setVisible(true);
             logout.setVisible(true);
-        }
+
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -137,20 +124,6 @@ public class MainActivity extends AppCompatActivity {
                         // Set item in checked state
                         menuItem.setChecked(true);
 
-                        if (menuItem.getItemId() == R.id.navProfileBTN) {
-
-//                            if (id!=0) {
-//                                fragmentManager = getSupportFragmentManager();
-//                                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//                                fragmentTransaction = fragmentManager.beginTransaction();
-//                                shopHomePage = new ShopHomePage();
-//                                fragmentTransaction.replace(R.id.fragment_main, shopHomePage);
-//                                fragmentTransaction.commit();
-//                                mDrawerLayout.closeDrawers();
-//                                return true;
-//                            }
-
-                        }
                         if (menuItem.getItemId() == R.id.navLogoutBTN) {
                             SharedPreferences.Editor editor = getSharedPreferences("Credentials", Context.MODE_PRIVATE).edit();
                             editor.clear();
@@ -161,60 +134,6 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction = fragmentManager.beginTransaction();
                             mainIntroFragment = new MainIntroFragment();
                             fragmentTransaction.replace(R.id.fragment_main, mainIntroFragment);
-                            fragmentTransaction.commit();
-                            mDrawerLayout.closeDrawers();
-                            return true;
-                        }
-                        if (menuItem.getItemId() == R.id.navLoginBTN) {
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            loginFragment = new LoginFragment2();
-                            fragmentTransaction.replace(R.id.fragment_main, loginFragment);
-                            fragmentTransaction.addToBackStack(null);
-                            fragmentTransaction.commit();
-                            mDrawerLayout.closeDrawers();
-                            return true;
-                        }
-                        if (menuItem.getItemId() == R.id.navRegistrationBTN) {
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            registrationFragment = new RegistrationFragment();
-                            fragmentTransaction.replace(R.id.fragment_main, registrationFragment);
-                            fragmentTransaction.addToBackStack(null);
-                            fragmentTransaction.commit();
-                            mDrawerLayout.closeDrawers();
-                            return true;
-                        }
-
-                        if (menuItem.getItemId() == R.id.navAddItemBTN) {
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            addItemFragment = new AddItemFragment();
-                            fragmentTransaction.add(R.id.fragment_main, addItemFragment);
-                            fragmentTransaction.addToBackStack(null);
-                            fragmentTransaction.commit();
-                            mDrawerLayout.closeDrawers();
-                            return true;
-                        }
-
-                        if (menuItem.getItemId() == R.id.navShopRegiter) {
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            registerShopFragment = new RegisterShopFragment();
-                            fragmentTransaction.replace(R.id.fragment_main, registerShopFragment);
-                            fragmentTransaction.addToBackStack(null);
-                            fragmentTransaction.commit();
-                            mDrawerLayout.closeDrawers();
-                            return true;
-                        }
-
-                        if (menuItem.getItemId() == R.id.Shop_Item) {
-                            fragmentManager = getSupportFragmentManager();
-                            fragmentTransaction = fragmentManager.beginTransaction();
-                            shopItemsFragment = new ShopItemsFragment();
-                            shopItemsFragment.setId(id);
-                            fragmentTransaction.replace(R.id.fragment_main, shopItemsFragment);
-                            fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
                             mDrawerLayout.closeDrawers();
                             return true;

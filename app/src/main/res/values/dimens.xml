@@ -5,6 +5,6 @@
     <dimen name="md_keylines">10dp</dimen>
     <dimen name="navheader_height">222dp</dimen>
     <dimen name="Shop_Profile_Start_Margin">20dp</dimen>
-    <dimen name="Shop_Profile_margin_Top">20dp</dimen>
+    <dimen name="Shop_Profile_margin_Top">10dp</dimen>
 
 </resources>
